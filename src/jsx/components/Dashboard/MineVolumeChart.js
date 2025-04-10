@@ -47,12 +47,12 @@ const MineVolumeChart = ({ country, height = 350 }) => {
         
         setSalesData(sortedData);
       } else {
-        setError('Invalid data format received from API');
-        toast.error('Failed to load mine volume data');
+       // setError('Invalid data format received from API');
+        // toast.error('Failed to load mine volume data');
       }
     } catch (err) {
-      setError(err.message || 'Error fetching sales data');
-      toast.error('Failed to load mine volume data');
+      //setError(err.message || 'Error fetching sales data');
+      // toast.error('Failed to load mine volume data');
       console.error('Error fetching sales data:', err);
     } finally {
       setLoading(false);

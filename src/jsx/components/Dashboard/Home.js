@@ -305,15 +305,65 @@ function Home({ language ,country}) {
             </div>
           </div>
         </div>
-        <div className='col-md-9'>	
-          <div className="card" id="sales_revenue" style={{ height: '400px' }}>
-            <div className="card-body p-0">
-              <MineVolumeChart country={country} height={400} />
+
+        {user.type === 'minexx'|| user.type ==='investor' ?(
+           <div className='col-md-9'>	
+           <div className="card" id="sales_revenue" style={{ height: '400px' }}>
+             <div className="card-body p-0">
+               <MineVolumeChart country={country} height={400} />
+             </div>
+           </div>
+         </div>
+        ):(
+          <div className='col-md-9'>	
+          <div className="card" id="sales_revenue">
+            <div className="card-header border-0 pb-0 d-sm-flex d-block">
+              <div>
+                <h4 className="mb-0 fs-20">{t('EventsOverview')}</h4>
+                <small className='font-w200 fs-12'><i className='fa fa-info-circle'></i> {t('load')}</small>
+              </div>
+              <div className="d-flex align-items-center mb-3 mb-sm-0">
+                <div className="round weekly" id="dzOldSeries">
+                  <div>
+                    <input type="checkbox" id="checkbox1" name="radio" checked={showincidents} onChange={e=>setshowincidents(e.target.checked)} />
+                    <label htmlFor="checkbox1" className="checkmark"></label>
+                  </div>
+                  <div>
+                    <span className="fs-14">{t('Incidents')}</span>
+                    <h4 className="fs-5 font-w600 mb-0">{total1}</h4>
+                  </div>
+                </div>
+                <div className="round " id="dzNewSeries">
+                  <div>
+                    <input type="checkbox" id="checkbox" name="radio" checked={showexports} onChange={e=>setshowexports(e.target.checked)} />
+                    <label htmlFor="checkbox" className="checkmark"></label>
+                  </div>
+                  <div>
+                    <span className="fs-14">{t('Exports')}</span>
+                    <h4 className="fs-5 font-w600 mb-0">{total2}</h4>
+                  </div>	
+                </div>
+                <div className="round last" id="dzOtherSeries">
+                  <div>
+                    <input type="checkbox" id="checkbox2" name="radio" checked={showassessments} onChange={e=>setshowassessments(e.target.checked)} />
+                    <label htmlFor="checkbox2" className="checkmark"></label>
+                  </div>
+                  <div>
+                    <span className="fs-14">{t('Assessments')}</span>
+                    <h4 className="fs-5 font-w600 mb-0">{total3}</h4>
+                  </div>	
+                </div>
+              </div>
+            </div>
+            <div style={{ height: 'auto' }} className="card-body custome-tooltip">
+              <HomeSalesRevenueChart series1={showincidents ? series1 : []} series2={showexports?series2:[]} series3={showassessments?series3:[]} days={months}/>
             </div>
           </div>
         </div>
+        
+       )}
         {user.type === 'minexx' ?
-        <div className={`col-md-3`}> 
+        <div className={`col-md-3`}>
           <div className="card">
             <div className="card-header border-0 pb-0">
               <h4 className="fs-20">{dropdown[filter]}</h4>
