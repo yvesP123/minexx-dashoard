@@ -139,7 +139,7 @@ const MineVolumeChart = ({ country, height = 350 }) => {
           <ResponsiveContainer width="100%" height="100%">
             <BarChart
               data={salesData}
-              margin={{ top: 5, right: 10, left: 40, bottom: 40 }}
+              margin={{ top: 5, right: 10, left: 40, bottom: 40 }} 
               barSize={30}
             >
               <CartesianGrid strokeDasharray="3 3" stroke="#f0f0f0" />

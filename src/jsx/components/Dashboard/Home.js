@@ -313,7 +313,7 @@ function Home({ language ,country}) {
           </div>
         </div>
         {user.type === 'minexx' ?
-        <div className={`col-md-3`}>
+        <div className={`col-md-3`}> 
           <div className="card">
             <div className="card-header border-0 pb-0">
               <h4 className="fs-20">{dropdown[filter]}</h4>
