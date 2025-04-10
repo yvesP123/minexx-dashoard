@@ -7,16 +7,26 @@ import { toast } from 'react-toastify';
 const MineVolumeChart = ({ country, height = 350 }) => {
   const [salesData, setSalesData] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [selectedMineral, setSelectedMineral] = useState('Cassiterite');
+  const [selectedMineral, setSelectedMineral] = useState('');
   const [error, setError] = useState(null);
+  const [access, setAccess] = useState(localStorage.getItem(`_dash`) || '3ts');
   
-  const minerals = [
-    { id: 'Cassiterite', label: 'Cassiterite', color: '#4dc9f6' },
-    { id: 'Coltan', label: 'Coltan', color: '#f67019' },
-    // { id: 'Tantalum', label: 'Tantalum', color: '#f53794' },
-    // { id: 'Tungsten', label: 'Tungsten', color: '#537bc4' },
-    // { id: 'Gold', label: 'Gold', color: '#acc236' }
-  ];
+  // Define minerals based on access type
+  const minerals = access === '3ts' 
+    ? [
+        { id: 'Cassiterite', label: 'Cassiterite', color: '#4dc9f6' },
+        { id: 'Coltan', label: 'Coltan', color: '#f67019' },
+      ]
+    : [
+        { id: 'Gold', label: 'Gold', color: '#acc236' },
+        { id: 'Diamond', label: 'Diamond', color: '#537bc4' },
+      ];
+
+  // Set default selected mineral based on access type
+  useEffect(() => {
+    setAccess(localStorage.getItem(`_dash`) || '3ts');
+    setSelectedMineral(access === '3ts' ? 'Cassiterite' : 'Gold');
+  }, [access]);
 
   const fetchSalesData = async (mineral) => {
     setLoading(true);
@@ -60,7 +70,9 @@ const MineVolumeChart = ({ country, height = 350 }) => {
   };
 
   useEffect(() => {
-    fetchSalesData(selectedMineral);
+    if (selectedMineral) {
+      fetchSalesData(selectedMineral);
+    }
   }, [selectedMineral, country]);
 
   const handleMineralChange = (mineral) => {
