@@ -104,7 +104,7 @@ const MineVolumeChart = ({ country, height = 350 }) => {
   return (
     <div style={{ height: '100%', width: '100%' }}>
       <div className="d-flex justify-content-between align-items-center py-2 px-3">
-        <h4 className="mb-0" style={{ fontSize: '16px' }}>Minerals Performance Overview</h4>
+        <h4 className="mb-0" style={{ fontSize: '16px' }}>Supplier Delivery Performance</h4>
         <div className="d-flex mineral-filters">
           {minerals.map(mineral => (
             <button
